@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://h9k1flhunter"]
+
+[ext_resource type="Script" path="res://scripts/FlashlightHunter.gd" id="1"]
+
+[sub_resource type="Gradient" id="Gradient_1"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1"]
+gradient = SubResource("Gradient_1")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
+size = Vector2(20, 28)
+
+[node name="FlashlightHunter" type="Area2D"]
+script = ExtResource("1")
+
+[node name="Visual" type="Node2D" parent="."]
+
+[node name="Body" type="Polygon2D" parent="Visual"]
+color = Color(0.2, 0.18, 0.16, 1)
+polygon = PackedVector2Array(-8, -14, 8, -14, 10, 14, -10, 14)
+
+[node name="LampGlow" type="Sprite2D" parent="Visual"]
+position = Vector2(0, -10)
+modulate = Color(1, 0.9, 0.5, 0.8)
+scale = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_1")
+
+[node name="PointLight2D" type="PointLight2D" parent="Visual"]
+position = Vector2(0, -10)
+texture = SubResource("GradientTexture2D_1")
+color = Color(1, 0.85, 0.5, 1)
+energy = 1.2
+texture_scale = 1.4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_1")
